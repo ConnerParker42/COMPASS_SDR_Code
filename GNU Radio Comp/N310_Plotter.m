@@ -48,30 +48,8 @@ function [] = N310_Plotter(parsedData, signalFreq)
         fprintf('Mean of In Phase A1: %d V\n', round( mean(signal2), -floor(log10(se2)) ))
         fprintf('Mean of In Phase B0: %d V\n', round( mean(signal3), -floor(log10(se3)) ))
         fprintf('Mean of In Phase B1: %d V\n\n', round( mean(signal4), -floor(log10(se4)) ))
-    
-        figure()
-        hold on
-        plot(time,signal1(1:len))
-        plot(time,signal2(1:len))
-        plot(time,signal3(1:len))
-        plot(time,signal4(1:len))
-        xlabel('Time [s]', Interpreter='latex'); ylabel('Signal [V]', Interpreter='latex'); grid on;
-        legend('Signal A0', 'Signal A1', 'Signal B0', 'Signal B1', Location='best')
-        xlim([0 .25])
-        title('Raw Signal (In Phase)')
 
-        figure()
-        hold on
-        histogram(signal1, NumBins=100)
-        histogram(signal2, NumBins=100)
-        histogram(signal3, NumBins=100)
-        histogram(signal4, NumBins=100)
-        xlabel('Voltage [V]', Interpreter='latex'); ylabel('Count', Interpreter='latex'); grid on;
-        legend('Signal A0', 'Signal A1', 'Signal B0', 'Signal B1', Location='best')
-        title('Raw Signal Cardinality (In Phase)')
-
-        
-        % Quadrature
+         % Quadrature
         signal1 = parsedData{1}.("Quadrature [V]");
         signal2 = parsedData{2}.("Quadrature [V]");
         signal3 = parsedData{3}.("Quadrature [V]");
@@ -96,8 +74,19 @@ function [] = N310_Plotter(parsedData, signalFreq)
         fprintf('Mean of Quadrature A1: %d V\n', round( mean(signal2), -floor(log10(se2)) ))
         fprintf('Mean of Quadrature B0: %d V\n', round( mean(signal3), -floor(log10(se3)) ))
         fprintf('Mean of Quadrature B1: %d V\n\n', round( mean(signal4), -floor(log10(se4)) ))
-
+    
         figure()
+        subplot(2,1,1)
+        hold on
+        plot(time,signal1(1:len))
+        plot(time,signal2(1:len))
+        plot(time,signal3(1:len))
+        plot(time,signal4(1:len))
+        xlabel('Time [s]', Interpreter='latex'); ylabel('Signal [V]', Interpreter='latex'); grid on;
+        legend('Signal A0', 'Signal A1', 'Signal B0', 'Signal B1', Location='best')
+        xlim([0 .25])
+        title('Raw Signal (In Phase)')
+        subplot(2,1,2)
         hold on
         plot(time,signal1(1:len))
         plot(time,signal2(1:len))
@@ -109,6 +98,16 @@ function [] = N310_Plotter(parsedData, signalFreq)
         title('Raw Signal (Quadrature)')
 
         figure()
+        subplot(2,1,1)
+        hold on
+        histogram(signal1, NumBins=100)
+        histogram(signal2, NumBins=100)
+        histogram(signal3, NumBins=100)
+        histogram(signal4, NumBins=100)
+        xlabel('Voltage [V]', Interpreter='latex'); ylabel('Count', Interpreter='latex'); grid on;
+        legend('Signal A0', 'Signal A1', 'Signal B0', 'Signal B1', Location='best')
+        title('Raw Signal Cardinality (In Phase)')
+        subplot(2,1,2)
         hold on
         histogram(signal1, NumBins=100)
         histogram(signal2, NumBins=100)
@@ -131,6 +130,7 @@ function [] = N310_Plotter(parsedData, signalFreq)
     end
 
     figure()
+    subplot(2,1,1)
     hold on
     plot(time,phase1)
     plot(time,phase2)
@@ -139,8 +139,7 @@ function [] = N310_Plotter(parsedData, signalFreq)
     xlabel('Time [s]', Interpreter='latex'); ylabel('Phase [s]', Interpreter='latex'); grid on;
     legend('Unwrapped Phase A0', 'Unwrapped Phase A1', 'Unwrapped Phase B0', 'Unwrapped Phase B1', Location='best')
     title('Unwrapped Phases')
-
-    figure()
+    subplot(2,1,2)
     hold on
     plot(time,detrend(phase1))
     plot(time,detrend(phase2))
@@ -151,14 +150,14 @@ function [] = N310_Plotter(parsedData, signalFreq)
     title('Detrended Phases')
 
     figure()
+    subplot(2,1,1)
     hold on
     plot(time,phase1 - phase2)
     plot(time,phase3 - phase4)
     xlabel('Time [s]', Interpreter='latex'); ylabel('Phase [s]', Interpreter='latex'); grid on;
     legend('Unwrapped Phase A0 - A1', 'Unwrapped Phase B0 - B1', Location='best')
     title('Unwrapped Phases Differences')
-
-    figure()
+    subplot(2,1,2)
     hold on
     plot(time,detrend(phase1 - phase2))
     plot(time,detrend(phase3 - phase4))
