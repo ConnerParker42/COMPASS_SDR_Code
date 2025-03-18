@@ -1,0 +1,21 @@
+% Housekeeping
+clc; clear; close all;
+
+% Change depending on test
+sampleRate = 120000 / (30 * 10 * 50);
+signalFreq = 10e6;
+
+% Paths to read and write data
+readPath = 'C:\Users\cpark\COMPASS Research\Phase NCO Data\PhaseNCO_Zero';
+funcPath = '..\Functions';
+addpath(readPath)
+addpath(funcPath)
+epoch = datetime(2024,3,1,10,41,00,"TimeZone","America/Denver");
+
+filesInRead = dir(readPath);
+filesInRead = extractfield(filesInRead,"name");
+
+%% Unwrapped Phases
+filesToRead = filesInRead(contains(filesInRead, "unwrapped"));
+parsedDataPhase = unwrappedPhaseParser(filesToRead,readPath,sampleRate,signalFreq);
+phaseNCO_Plotter(parsedDataPhase, "C:\Users\cpark\COMPASS Research\COMPASSLabCode\Doppler_Shift_NCO\DopPhase_Zero.bin")
