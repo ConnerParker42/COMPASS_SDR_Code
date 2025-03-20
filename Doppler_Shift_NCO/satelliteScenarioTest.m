@@ -121,7 +121,7 @@ title("Cardinality of Doppler Profile")
 xlabel("Frequency [Hz]")
 ylabel("Count")
 
-folderPath = 'C:\Users\cpark\COMPASS Research\N210 NCO Characterization\Phase Offsets\';
+folderPath = '/home/copa5633/COMPASS_Research/NCO_DopShift/Phase Offsets/';
 fileID = fopen([folderPath fileName], 'wb');
 fwrite(fileID,dopShiftRads,"double");
 fclose(fileID);

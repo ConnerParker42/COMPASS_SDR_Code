@@ -84,7 +84,7 @@ function [] = N310_Plotter(parsedData, signalFreq)
         plot(time,signal4(1:len))
         xlabel('Time [s]', Interpreter='latex'); ylabel('Signal [V]', Interpreter='latex'); grid on;
         legend('Signal A0', 'Signal A1', 'Signal B0', 'Signal B1', Location='best')
-        xlim([0 .25])
+        % xlim([0 .25])
         title('Raw Signal (In Phase)')
         subplot(2,1,2)
         hold on
@@ -94,7 +94,7 @@ function [] = N310_Plotter(parsedData, signalFreq)
         plot(time,signal4(1:len))
         xlabel('Time [s]', Interpreter='latex'); ylabel('Signal [V]', Interpreter='latex'); grid on;
         legend('Signal A0', 'Signal A1', 'Signal B0', 'Signal B1', Location='best')
-        xlim([0 .25])
+        % xlim([0 .25])
         title('Raw Signal (Quadrature)')
 
         figure()
@@ -127,6 +127,11 @@ function [] = N310_Plotter(parsedData, signalFreq)
         xlabel('In Phase [V]', Interpreter='latex'); ylabel('Quadrature [V]', Interpreter='latex'); grid on;
         legend('A0','A1','B0','B1', Location='best')
         title('Phasor Graph')
+
+        fprintf('Power of A0: %d dB\n', 20*log10(max(signal1)))
+        fprintf('Power of A1: %d dB\n', 20*log10(max(signal2)))
+        fprintf('Power of B0: %d dB\n', 20*log10(max(signal3)))
+        fprintf('Power of B1: %d dB\n\n', 20*log10(max(signal4)))
     end
 
     figure()
