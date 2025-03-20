@@ -1,5 +1,5 @@
 % Housekeeping
-clc; clear; close all;
+% clc; clear; close all;
 
 % Change depending on test
 sampleRateIQ = 500e3 / (50 * 10);
@@ -8,13 +8,13 @@ beatFreq = 73; % Hz
 NCO_sampleRate = 200e3; % Hz
 
 % Time interval where data is valid
-timeInt = [2.919 440]; % sec
+timeInt = [0.056 430]; % sec
 
 % Paths to read and write data
-readPath = 'C:\Users\cpark\COMPASS Research\N210 NCO Characterization\N210_NCO_Noise';
+readPath = 'C:\Users\cpark\COMPASS Research\N210 NCO Characterization\N210_NCO_MAXWELL';
 savePath = '../Figures';
 funcPath = '../Functions';
-cmdPhasePath = "C:\Users\cpark\COMPASS Research\COMPASSLabCode\Doppler_Shift_NCO\DopPhase_Zero.bin";
+cmdPhasePath = "C:\Users\cpark\COMPASS Research\N210 NCO Characterization\Phase Offsets\DopPhase_MAXWELL.bin";
 currDirec = pwd;
 addpath(readPath,funcPath)
 

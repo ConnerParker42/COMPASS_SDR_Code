@@ -84,8 +84,8 @@ fileName = 'DopPhase_MAXWELL.bin';
 
 % dopShift = (linspace(0, 0, n))'; % Hz
 % fileName = 'DopPhase_Zero.bin';
-dopShift = (linspace(3, 3, n))'; % Hz
-fileName = 'DopPhase_Const.bin';
+% dopShift = (ones(n,1))' * 0.1; % Hz
+% fileName = 'DopPhase_Const.bin';
 % dopShift = (linspace(0, 100, n))'; % Hz
 % fileName = 'DopPhase_PosLin.bin';
 % dopShift = (linspace(0, -100, n))'; % Hz
@@ -114,11 +114,14 @@ title(["Doppler Shift in Radians of " , sat.Name])
 xlabel("Elapsed Time [s]")
 ylabel("Doppler Shift [rad]")
 
-folderPath = 'C:\Users\cpark\COMPASS Research\COMPASSLabCode\Doppler_Shift_NCO\';
+figure()
+histogram(abs(dopShift))
+grid on;
+title("Cardinality of Doppler Profile")
+xlabel("Frequency [Hz]")
+ylabel("Count")
+
+folderPath = 'C:\Users\cpark\COMPASS Research\N210 NCO Characterization\Phase Offsets\';
 fileID = fopen([folderPath fileName], 'wb');
 fwrite(fileID,dopShiftRads,"double");
 fclose(fileID);
-
-% fileID = fopen("MAXWELL_dopShift", "w+");
-% fwrite(fileID, dopShift,"float32");
-% fclose(fileID);

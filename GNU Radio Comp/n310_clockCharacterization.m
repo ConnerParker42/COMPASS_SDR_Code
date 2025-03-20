@@ -7,7 +7,7 @@ sampleRate = 120000 / (30 * 10 * 50);
 signalFreq = 10e6;
 
 % Paths to read and write data
-readPath = 'C:\Users\cpark\COMPASS Research\N310 Noise Characterization\N310_Noise_Rb';
+readPath = 'C:\Users\cpark\COMPASS Research\N310 Noise Characterization\N310_Noise_tuneGain';
 savePath = '../Figures';
 funcPath = '../Functions';
 currDirec = pwd;
