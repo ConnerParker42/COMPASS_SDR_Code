@@ -7,11 +7,11 @@ function [] = PhaseNCO_N210_Plotter(parsedData, cmdPhase_filePath, cmdPhaseRate,
 %   Outputs: N/A
 %   Plots: Characterization plots of rx signal on N210
 
-    set(groot,'defaultLineLineWidth',1.5)
-    set(groot,'defaultAxesFontSize',10)
+    % set(groot,'defaultLineLineWidth',1.5)
+    % set(groot,'defaultAxesFontSize',1)
 
     measTime = parsedData{1}.Time;
-    measPhaseDiff1 = parsedData{1}.("Phase [s]");
+    measPhaseDiff1 = parsedData{1}.("Phase [rad]");
 
     [~, lowIndex] = min(abs(measTime-timeInt(1)));
     [~, highIndex] = min(abs(measTime-timeInt(2)));

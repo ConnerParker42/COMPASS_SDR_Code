@@ -19,21 +19,26 @@ function [parsedData] = IQDataParser(filesToRead, readPath, sampleRate, signalFr
         fileID = fopen(file0, 'rb');
         FreqFile = fread(fileID, 1e8, 'float');
         % Separate In-Phase and Quadrature components
-        FreqInPhase = FreqFile(1:2:end); % real (cosine)
-        FreqQuadrature = FreqFile(2:2:end); % complex (sine)
+        SignalInPhase = FreqFile(1:2:end); % real (cosine)
+        SignalQuadrature = FreqFile(2:2:end); % complex (sine)
         
-        t = (0:length(FreqInPhase)-1)'./sampleRate;
+        t = (0:length(SignalInPhase)-1)'./sampleRate;
         
         % Remove beat frequency
         beatFreqCos = cos(2 * pi * beatFreq * t);
         beatFreqSin = sin(2 * pi * beatFreq * t);
 
-        FreqInPhasePrime = FreqInPhase .* beatFreqCos + FreqQuadrature .* beatFreqSin;
-        FreqQuadraturePrime = FreqQuadrature .* beatFreqCos - FreqInPhase .* beatFreqSin;
+        % Complex mixing
+        % FreqInPhasePrime = FreqInPhase .* beatFreqCos + FreqQuadrature .* beatFreqSin;
+        % FreqQuadraturePrime = FreqQuadrature .* beatFreqCos - FreqInPhase .* beatFreqSin;
+
+        % Real mixing
+        FreqInPhasePrime = SignalInPhase .* beatFreqCos;
+        FreqQuadraturePrime = -SignalInPhase .* beatFreqSin;
         
         % Compute phase in radians from each file and difference
         wrapRad = atan2(FreqQuadraturePrime,FreqInPhasePrime);
-        
+
         % Unwrap before converting to seconds
         phaseRad = unwrap(wrapRad);
         
@@ -41,7 +46,7 @@ function [parsedData] = IQDataParser(filesToRead, readPath, sampleRate, signalFr
         phaseSec = phaseRad  ./ (2 * pi * signalFreq);
 
          % Build time vector based on sample size and sample rate
-        dataTable = table(t, FreqInPhase, FreqQuadrature, phaseRad, phaseSec, 'VariableNames', ["Time", "In Phase [V]", "Quadrature [V]", "Phase [rad]", "Phase [s]"] );
+        dataTable = table(t, SignalInPhase, SignalQuadrature, phaseRad, phaseSec, 'VariableNames', ["Time", "In Phase [V]", "Quadrature [V]", "Phase [rad]", "Phase [s]"] );
         parsedData{end+1} = dataTable;
     end
 end

@@ -20,11 +20,11 @@ function [] = N200_ClockPlotter_SingleInput(parsedData, signalFreq)
         se1 = std(signal1)/sqrt(len);
         fprintf('Mean of In Phase RF1: %d V\n', round( mean(signal1), -floor(log10(se1)) ))
 
-        signal1 = parsedData{1}.("Quadrature [V]");
-        fprintf('RMS of Quadrature RF1: %d V\n', rms(signal1,"all"))
-        fprintf('Standard Deviation of Quadrature RF1: %.1d V\n', std(signal1) )
-        se1 = std(signal1)/sqrt(len);
-        fprintf('Mean of Quadrature RF1: %d V\n', round( mean(signal1), -floor(log10(se1)) ))
+        signal2 = parsedData{1}.("Quadrature [V]");
+        fprintf('RMS of Quadrature RF1: %d V\n', rms(signal2,"all"))
+        fprintf('Standard Deviation of Quadrature RF1: %.1d V\n', std(signal2) )
+        se2 = std(signal2)/sqrt(len);
+        fprintf('Mean of Quadrature RF1: %d V\n', round( mean(signal2), -floor(log10(se2)) ))
 
         % Raw Signal
         figure()
@@ -37,7 +37,7 @@ function [] = N200_ClockPlotter_SingleInput(parsedData, signalFreq)
         title('Raw Signal (In Phase)')
         subplot(2,1,2)
         hold on
-        plot(time,signal1)
+        plot(time,signal2)
         xlabel('Time [s]', Interpreter='latex'); ylabel('Signal [V]', Interpreter='latex'); grid on;
         legend('Signal RF1', Location='best')
         % xlim([0 .25])
@@ -53,7 +53,7 @@ function [] = N200_ClockPlotter_SingleInput(parsedData, signalFreq)
         title('Raw Signal Cardinality (In Phase)')
         subplot(2,1,2)
         hold on
-        histogram(signal1, NumBins=100)
+        histogram(signal2, NumBins=100)
         xlabel('Voltage [V]', Interpreter='latex'); ylabel('Count', Interpreter='latex'); grid on;
         legend('Signal RF1', Location='best')
         title('Raw Signal Cardinality (Quadrature)')
