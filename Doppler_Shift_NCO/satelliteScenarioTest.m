@@ -1,4 +1,14 @@
 close all; clear; clc;
+
+set(groot, ...
+    'defaultAxesFontSize',10, ...
+    'defaultTextFontSize',15, ...
+    'defaultTextFontSizeMode','manual', ...
+    'defaultLegendFontSize',32, ...
+    'defaultLegendFontSizeMode','manual', ...
+    'DefaultLineLineWidth',2 ...
+    )
+
 tic;
 
 c = 299792458;
@@ -75,17 +85,18 @@ toc;
 
 n200_samp_rate = 200e3;
 elapseTime = (seconds(timeVec - timeVec(1)))';
-n200_time = 0:1/n200_samp_rate:elapseTime(end);
+% n200_time = 0:1/n200_samp_rate:elapseTime(end);
+n200_time = 0:1/n200_samp_rate:1800;
 n = length(n200_time);
 
-dopShift = velNorms/c * signalFreq; % Hz
-dopShift = interp1(elapseTime,dopShift,n200_time);
-fileName = 'DopPhase_MAXWELL.bin';
+% dopShift = velNorms/c * signalFreq; % Hz
+% dopShift = interp1(elapseTime,dopShift,n200_time);
+% fileName = 'DopPhase_MAXWELL.bin';
 
 % dopShift = (linspace(0, 0, n))'; % Hz
 % fileName = 'DopPhase_Zero.bin';
-% dopShift = (ones(n,1))' * 0.1; % Hz
-% fileName = 'DopPhase_Const.bin';
+dopShift = (ones(n,1))' * 1.3; % Hz
+fileName = 'DopPhase_Const.bin';
 % dopShift = (linspace(0, 100, n))'; % Hz
 % fileName = 'DopPhase_PosLin.bin';
 % dopShift = (linspace(0, -100, n))'; % Hz
@@ -95,33 +106,40 @@ fileName = 'DopPhase_MAXWELL.bin';
 % dopShift = 50 * (sawtooth(2*pi*.01*n200_time + pi/2, .5))'; % Hz
 % fileName = 'DopPhase_sawtooth.bin';
 
-dopShiftRads = cumtrapz(dopShift) * 2*pi/n200_samp_rate; % rads
+dopPhaseRads = cumtrapz(dopShift) * 2*pi/n200_samp_rate; % rads
 
 % dopShiftRads = (linspace(1, 1, n))';
 % fileName = 'DopPhase_ConstPhase.bin';
 
-figure()
-plot(n200_time, dopShift);
-grid on;
-title(["Doppler Shift of " , sat.Name])
-xlabel("Elapsed Time [s]")
-ylabel("Doppler Shift [Hz]")
+% figure()
+% plot(n200_time, dopShift);
+% grid on;
+% title(["Doppler Shift of " , sat.Name])
+% xlabel("Elapsed Time [s]")
+% ylabel("Doppler Shift [Hz]")
 
-figure()
-plot(n200_time, dopShiftRads)
-grid on;
-title(["Doppler Shift in Radians of " , sat.Name])
-xlabel("Elapsed Time [s]")
-ylabel("Doppler Shift [rad]")
+% figure()
+% plot(n200_time, dopPhaseRads)
+% grid on;
+% title(["Doppler Shift in Radians of " , sat.Name])
+% xlabel("Elapsed Time [s]")
+% ylabel("Doppler Shift [rad]")
 
-figure()
-histogram(abs(dopShift))
-grid on;
-title("Cardinality of Doppler Profile")
-xlabel("Frequency [Hz]")
-ylabel("Count")
+% figure()
+% plot(n200_time, detrend(dopPhaseRads))
+% grid on;
+% title(["Detrended Doppler Shift in Radians of " , sat.Name])
+% xlabel("Elapsed Time [s]")
+% ylabel("Doppler Shift [rad]")
 
-folderPath = '/home/copa5633/COMPASS_Research/NCO_DopShift/Phase Offsets/';
+% figure()
+% histogram(abs(dopShift))
+% grid on;
+% title("Cardinality of Doppler Profile")
+% xlabel("Frequency [Hz]")
+% ylabel("Count")
+
+folderPath = './';
 fileID = fopen([folderPath fileName], 'wb');
-fwrite(fileID,dopShiftRads,"double");
+fwrite(fileID,dopPhaseRads,'double');
 fclose(fileID);
