@@ -29,12 +29,12 @@ function [parsedData] = IQDataParser(filesToRead, readPath, sampleRate, signalFr
         beatFreqSin = sin(2 * pi * beatFreq * t);
 
         % Complex mixing
-        % FreqInPhasePrime = FreqInPhase .* beatFreqCos + FreqQuadrature .* beatFreqSin;
-        % FreqQuadraturePrime = FreqQuadrature .* beatFreqCos - FreqInPhase .* beatFreqSin;
+        FreqInPhasePrime = SignalInPhase .* beatFreqCos + SignalQuadrature .* beatFreqSin;
+        FreqQuadraturePrime = SignalQuadrature .* beatFreqCos - SignalInPhase .* beatFreqSin;
 
         % Real mixing
-        FreqInPhasePrime = SignalInPhase .* beatFreqCos;
-        FreqQuadraturePrime = -SignalInPhase .* beatFreqSin;
+        % FreqInPhasePrime = SignalInPhase .* beatFreqCos;
+        % FreqQuadraturePrime = -SignalInPhase .* beatFreqSin;
         
         % Compute phase in radians from each file and difference
         wrapRad = atan2(FreqQuadraturePrime,FreqInPhasePrime);
