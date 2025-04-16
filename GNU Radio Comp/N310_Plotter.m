@@ -9,6 +9,7 @@ function [] = N310_Plotter(parsedData, signalFreq)
 
     time = parsedData{1}.Time;
     phaseDataType = "Phase [rad]";
+    samp_rate = 1/(time(2)-time(1));
 
 
     phase1 = parsedData{1}.(phaseDataType);
@@ -135,6 +136,9 @@ function [] = N310_Plotter(parsedData, signalFreq)
         fprintf('Power of A1: %d dB\n', 20*log10(max(signal2_i)))
         fprintf('Power of B0: %d dB\n', 20*log10(max(signal3_i)))
         fprintf('Power of B1: %d dB\n\n', 20*log10(max(signal4_i)))
+
+        FFT_Plotter(signal1_q, samp_rate)
+        FFT_Plotter(signal1_i, samp_rate)
     end
 
     figure()
@@ -184,19 +188,19 @@ function [] = N310_Plotter(parsedData, signalFreq)
     % legend('Detrended Phase B0 - B1', Location='best')
     title('Detrended Phases Differences Cross Daughterboard')
 
-    % format long;
-    % coef = polyfit(time,phase1,1);
-    % fprintf('Frequency Offset between A0 and Reference Clock: %d Hz\n', coef(1)*signalFreq)
-    % coef = polyfit(time,phase2,1);
-    % fprintf('Frequency Offset between A1 and Reference Clock: %d Hz\n', coef(1)*signalFreq)
-    % coef = polyfit(time,phase3,1);
-    % fprintf('Frequency Offset between B0 and Reference Clock: %d Hz\n', coef(1)*signalFreq)
-    % coef = polyfit(time,phase4,1);
-    % fprintf('Frequency Offset between B1 and Reference Clock: %d Hz\n', coef(1)*signalFreq)
-    % 
-    % coef = polyfit(time,phase1 - phase2,1);
-    % fprintf('Frequency Offset between A0 and A1: %d Hz\n', coef(1)*signalFreq)
-    % coef = polyfit(time,phase3 - phase4,1);
-    % fprintf('Frequency Offset between B0 and B1: %d Hz\n\n', coef(1)*signalFreq)
+    format long;
+    coef = polyfit(time,phase1,1);
+    fprintf('Frequency Offset between A0 and Reference Clock: %d Hz\n', coef(1)*signalFreq)
+    coef = polyfit(time,phase2,1);
+    fprintf('Frequency Offset between A1 and Reference Clock: %d Hz\n', coef(1)*signalFreq)
+    coef = polyfit(time,phase3,1);
+    fprintf('Frequency Offset between B0 and Reference Clock: %d Hz\n', coef(1)*signalFreq)
+    coef = polyfit(time,phase4,1);
+    fprintf('Frequency Offset between B1 and Reference Clock: %d Hz\n', coef(1)*signalFreq)
+
+    coef = polyfit(time,phase1 - phase2,1);
+    fprintf('Frequency Offset between A0 and A1: %d Hz\n', coef(1)*signalFreq)
+    coef = polyfit(time,phase3 - phase4,1);
+    fprintf('Frequency Offset between B0 and B1: %d Hz\n\n', coef(1)*signalFreq)
 
 end

@@ -28,8 +28,9 @@ fprintf('Starting IQ Data Processing\n')
 IQFiles = filesInRead(contains(filesInRead, "complex_data"));
 parsedIQData = IQDataParser(IQFiles, readPath, sampleRateIQ, signalFreq, beatFreq);
 % N200_ClockPlotter(parsedIQData, signalFreq)
-N200_ClockPlotter_SingleInput(parsedIQData, signalFreq)
-PhaseNCO_N210_Plotter(parsedIQData, cmdPhasePath, NCO_sampleRate, signalFreq, timeInt)
+% N200_ClockPlotter_SingleInput(parsedIQData, signalFreq)
+% PhaseNCO_N210_Plotter(parsedIQData, cmdPhasePath, NCO_sampleRate, signalFreq, timeInt)
+PhaseNCO_N310_Plotter(parsedIQData, cmdPhasePath, NCO_sampleRate, signalFreq, timeInt)
 
 % fprintf('Starting ADEV Data Processing\n')
 % % OADData = OADParser_N200(parsedIQData, sampleRateIQ);
