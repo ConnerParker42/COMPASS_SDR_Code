@@ -2,19 +2,19 @@
 clc; clear; close all;
 
 % Change depending on test
-sampleRateIQ = 500e3 / (50 * 10);
+sampleRateIQ = 120e3 / (30 * 10);
 signalFreq = 100e6; % Hz
 beatFreq = 73; % Hz
 NCO_sampleRate = 200e3; % Hz
 
 % Time interval where data is valid
-timeInt = [0.056 1800]; % sec
+timeInt = [1.445 425]; % sec
 
 % Paths to read and write data
-readPath = 'C:\Users\cpark\COMPASS Research\N210 NCO Characterization\N210_NCO_Const_13';
+readPath = '/home/copa5633/COMPASS_Research/GNU_Data';
 savePath = '../Figures';
 funcPath = '../Functions';
-cmdPhasePath = "C:\Users\cpark\COMPASS Research\N210 NCO Characterization\Phase Offsets\DopPhase_Const.bin";
+cmdPhasePath = "/home/copa5633/COMPASS_Research/NCO_DopShift/Phase Offsets/DopPhase_sawtooth.bin";
 currDirec = pwd;
 addpath(readPath,funcPath)
 
@@ -27,6 +27,7 @@ tic
 fprintf('Starting IQ Data Processing\n')
 IQFiles = filesInRead(contains(filesInRead, "complex_data"));
 parsedIQData = IQDataParser(IQFiles, readPath, sampleRateIQ, signalFreq, beatFreq);
+N310_Plotter(parsedIQData, signalFreq)
 % N200_ClockPlotter(parsedIQData, signalFreq)
 % N200_ClockPlotter_SingleInput(parsedIQData, signalFreq)
 % PhaseNCO_N210_Plotter(parsedIQData, cmdPhasePath, NCO_sampleRate, signalFreq, timeInt)
