@@ -1,5 +1,6 @@
 function [] = PhaseNCO_N310_Plotter(parsedData, cmdPhase_filePath, cmdPhaseRate, signalFreq,timeInt)
-% PhaseNCO_Plotter: Plot graphs to characterize phase NCO
+% PhaseNCO_N310_Plotter: Plot graphs to characterize phase NCO assuming the
+% data was gather on the N310
 %   Inputs: parsedData = cell array from PhaseParser function
 %       cmdPhase_filePath = file path to folder with files of commanded
 %       phase
@@ -44,7 +45,7 @@ function [] = PhaseNCO_N310_Plotter(parsedData, cmdPhase_filePath, cmdPhaseRate,
     xline(timeInt(2), Color=[1,0,0])
     xlabel('Time [s]', Interpreter='latex'); ylabel('Phase [s]', Interpreter='latex'); grid on;
     legend('Measured Phase A0 - A1', 'Measured Phase B0 - B1','Commanded Phase', 'Cutoff', Location='best')
-    title('N200 Phase NCO')
+    title('Phase NCO Measurement')
 
     figure()
     hold on
@@ -55,10 +56,10 @@ function [] = PhaseNCO_N310_Plotter(parsedData, cmdPhase_filePath, cmdPhaseRate,
     title('Phase Error')
     hold off
 
-    % coef = polyfit(measTime,phaseErr1,1);
-    % freqOffsetA0A1 = coef(1) * signalFreq
-    % coef = polyfit(measTime,phaseErr2,1);
-    % freqOffsetB0B1 = coef(1) * signalFreq
+    coef = polyfit(measTime,phaseErr1,1);
+    fprintf('Frequency Offset of Phase Error A Daughterboard: %d Hz\n', coef(1)*signalFreq)
+    coef = polyfit(measTime,phaseErr2,1);
+    fprintf('Frequency Offset of Phase Error B Daughterboard: %d Hz\n', coef(1)*signalFreq)
 
     figure()
     hold on
@@ -66,7 +67,7 @@ function [] = PhaseNCO_N310_Plotter(parsedData, cmdPhase_filePath, cmdPhaseRate,
     plot(measTime, detrend(phaseErr2))
     xlabel('Time [s]', Interpreter='latex'); ylabel('Phase [s]', Interpreter='latex'); grid on;
     legend('Phase Error A0 - A1', 'Phase Error B0 - B1', Location='best')
-    title('Phase Error')
+    title('Detrended Phase Error')
     hold off
 
     fclose(fileID);

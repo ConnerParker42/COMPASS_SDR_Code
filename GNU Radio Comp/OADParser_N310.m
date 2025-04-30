@@ -1,5 +1,5 @@
 function [parsedDataOAD] = OADParser_N310(parsedDataPhase, sampleRate)
-% OADParser_singleInput: Computes OAD from parsed data assuming internal
+% OADParser_N310: Computes OAD from parsed data assuming internal
 %   reference clock on the N310
 %   Inputs: parsedDataPhase = cell array from PhaseParser function
 %       sampleRate = sample rate of samples in files

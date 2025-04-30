@@ -1,20 +1,52 @@
+%--------------------------------------------------------------------------
+% File Name:        nco_characterization
+% Author:           Conner Parker
+% Created:          2025-01
+% Last Modified:    2025-04-30
+%
+% Description:
+%   This script processes data from N310 or N210 for NCO characterization testing. 
+%
+% Notes:
+%   Requires Signal Processing Toolbox.
+%   Besure to change any variables such that the code finds the correct
+%   file and uses the correct testing parameters, sample rates, carrier
+%   freq etc.
+%   The time interval must be chosen such that the data is when both the TX
+%   and RX are working. Usually the RX has a few seconds of data at the
+%   beginning where the TX is not on.
+%   
+%
+% Dependencies:
+%   - IQDataParser.m
+%   - N310_Plotter.m
+%   - N200_ClockPlotter.m
+%   - N200_ClockPlotter_SingleInput.m
+%   - PhaseNCO_N210_Plotter.m
+%   - PhaseNCO_N310_Plotter.m
+%   - OADParser_N200.m
+%   - OADParser_singleInput.m
+%   - OADPlotter.m
+%
+%--------------------------------------------------------------------------
+
 % Housekeeping
 clc; clear; close all;
 
 % Change depending on test
 sampleRateIQ = 120e3 / (30 * 10);
-signalFreq = 100e6; % Hz
+signalFreq = 10e6; % Hz
 beatFreq = 73; % Hz
 NCO_sampleRate = 200e3; % Hz
 
 % Time interval where data is valid
-timeInt = [1.445 425]; % sec
+timeInt = [1.44 300]; % sec
 
 % Paths to read and write data
-readPath = '/home/copa5633/COMPASS_Research/GNU_Data';
+readPath = 'C:\Users\cpark\COMPASS Research\N210 NCO Characterization\N310_NCO_sawtooth_basic';
 savePath = '../Figures';
 funcPath = '../Functions';
-cmdPhasePath = "/home/copa5633/COMPASS_Research/NCO_DopShift/Phase Offsets/DopPhase_sawtooth.bin";
+cmdPhasePath = "C:\Users\cpark\COMPASS Research\N210 NCO Characterization\Phase Offsets\DopPhase_sawtooth.bin";
 currDirec = pwd;
 addpath(readPath,funcPath)
 
@@ -34,7 +66,7 @@ N310_Plotter(parsedIQData, signalFreq)
 PhaseNCO_N310_Plotter(parsedIQData, cmdPhasePath, NCO_sampleRate, signalFreq, timeInt)
 
 % fprintf('Starting ADEV Data Processing\n')
-% % OADData = OADParser_N200(parsedIQData, sampleRateIQ);
+% OADData = OADParser_N200(parsedIQData, sampleRateIQ);
 % OADData = OADParser_singleInput(parsedIQData, sampleRateIQ);
 % OADPlotter(OADData)
 

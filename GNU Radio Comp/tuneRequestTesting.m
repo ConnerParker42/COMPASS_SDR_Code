@@ -1,3 +1,23 @@
+%--------------------------------------------------------------------------
+% File Name:        tuneRequestTesting
+% Author:           Conner Parker
+% Created:          2025-01
+% Last Modified:    2025-04-30
+%
+% Description:
+%   Testing script which steps through the tune request structure
+%
+% Notes:
+%   Besure to change any variables such that the tune request is about the
+%   correct signal and request parameters
+%   
+%
+% Dependencies:
+%   - None
+%
+%--------------------------------------------------------------------------
+
+% Housekeeping
 clc; clear; close all;
 format long;
 

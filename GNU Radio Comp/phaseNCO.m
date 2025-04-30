@@ -1,3 +1,17 @@
+%--------------------------------------------------------------------------
+% File Name:        nco_characterization
+% Author:           Conner Parker
+% Created:          2025-01
+% Last Modified:    2025-04-30
+%
+% Description:
+%   This script is very old, it is not useful but will remain in case it it
+%   required.
+%   Does the same thing as nco_characterization but the function calls may
+%   not have correct parameters
+%
+%--------------------------------------------------------------------------
+
 % Housekeeping
 clc; clear; close all;
 

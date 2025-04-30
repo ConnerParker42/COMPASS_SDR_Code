@@ -1,3 +1,29 @@
+%--------------------------------------------------------------------------
+% File Name:        n310_clockCharacterization
+% Author:           Conner Parker
+% Created:          2024-01-28
+% Last Modified:    2025-04-30
+%
+% Description:
+%   This script processes a raw IQ signal from N310 with the optional code
+%   to run unwrapped phase parsing
+%
+% Notes:
+%   Requires Signal Processing Toolbox.
+%   Besure to change any variables such that the code finds the correct
+%   file and uses the correct testing parameters, sample rates, carrier
+%   freq etc.
+%
+% Dependencies:
+%   - IQDataParser.m
+%   - N310_Plotter.m
+%   - UnwrappedPhaseParser.m
+%   - OADParser_N310.m
+%   - OADPlotter.m
+%
+%--------------------------------------------------------------------------
+
+
 % Housekeeping
 clc; clear; close all;
 

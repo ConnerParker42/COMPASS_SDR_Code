@@ -1,4 +1,17 @@
 function[EB_Lower, EB_Upper] = ADEV_ErrorBars(Tau, OAD, N)
+% ADEV_ErrorBars: Calculates the upper and low bound error of ADEV
+%   Inputs: Tau = vector of tau values
+%       OAD = Overlapping Allan Deviation values
+%       N = number of tua values
+%   Outputs: EB_Lower = vector of lower bound ADEV errors
+%       EB_Upper = vector of upper bound ADEV errors
+%   Plots: N/A
+
+% Note from Conner 
+% I was never able to verify this code's validity, use with cause until
+% thoroughly tested and validated against Stable32
+
+
 inflection = find(OAD == min(OAD));
 % y2 = find(abs(Tau - 10^floor(log10(Tau(inflection))))== min(abs(Tau - 10^floor(log10(Tau(inflection))))));
 % slopes = (log10(OAD(y2)) - log10(OAD(1)))/(log10(Tau(y2)) - log10(Tau(1)));

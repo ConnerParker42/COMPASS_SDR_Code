@@ -1,3 +1,32 @@
+%--------------------------------------------------------------------------
+% File Name:        n310_ensemble_estimates
+% Author:           Conner Parker
+% Created:          2023-10-28
+% Last Modified:    2025-04-30
+%
+% Description:
+%   This script processes data from the N310 assuming the gnu script had
+%   the embedded clock ensemble Kalman Filter.
+%
+% Notes:
+%   Requires Signal Processing Toolbox.
+%   Besure to change any variables such that the code finds the correct
+%   file and uses the correct testing parameters, sample rates, carrier
+%   freq etc.
+%   CSAC telemetry data is also plotted if available, uncomment csac
+%   plotting section to plot
+%
+% Dependencies:
+%   - unwrappedPhaseParser.m
+%   - phaseDifferencePlotter.m
+%   - phaseEstPlotter.m
+%   - freqEstParser.m
+%   - TelemParser.m
+%   - TelemPlotter.m
+%
+%--------------------------------------------------------------------------
+
+
 % Housekeeping
 clc; clear; close all;
 
