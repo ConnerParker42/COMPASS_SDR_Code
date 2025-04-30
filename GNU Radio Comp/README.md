@@ -1,4 +1,4 @@
-# COMPASSLabCode
+# GNU Radio Comp
 
 Code used to parse both raw IQ signal data as well as unwrapped phase data from COMPASS Lab SDRs.
 
